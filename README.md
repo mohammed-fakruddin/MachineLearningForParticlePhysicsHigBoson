@@ -2,6 +2,7 @@
 # Site Link
 https://mohammed-fakruddin.github.io/MachineLearningForParticlePhysicsHigBoson/
 # One Page Summary
+https://github.com/mohammed-fakruddin/MachineLearningForParticlePhysicsHigBoson/blob/master/documents/ParticlePhysics_HEP_V1.pdf
 # Objectives
 I was in Zurich working for UBS during the period of 2018-2020. When my family visited me in Zurich during the summer of July/Aug 2019, I took them for 1 day trip to Geneva to visit the CERN laboratory, the birth place of "God particle". The trip was amazing, it takes one through the journey of atomic particle to sub-atomic. There were lots of short video clips, practical demonstrations and exhibitions etc.
 What caught my eyes was a poster with title "Machine Learning for High Energy Physics". The aim of the poster was to explore the new ways to improve the cross-fertilization of the two fields: astrophysics community (dark matter and galaxy zoo challenges) and neurobiology (connectomics and decoding the human brain).Therefore, I decided to explore what is particle physics and how can the machine learning and deep learning can help solve the particle physics problems. The summary of this short article was the result of my visit to CERN laboratory. 
