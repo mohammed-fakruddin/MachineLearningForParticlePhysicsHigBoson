@@ -1,5 +1,6 @@
 # MachineLearningForParticlePhysicsHigBoson
 # Site Link
+https://mohammed-fakruddin.github.io/MachineLearningForParticlePhysicsHigBoson/
 # One Page Summary
 # Objectives
 I was in Zurich working for UBS during the period of 2018-2020. When my family visited me in Zurich during the summer of July/Aug 2019, I took them for 1 day trip to Geneva to visit the CERN laboratory, the birth place of "God particle". The trip was amazing, it takes one through the journey of atomic particle to sub-atomic. There were lots of short video clips, practical demonstrations and exhibitions etc.
