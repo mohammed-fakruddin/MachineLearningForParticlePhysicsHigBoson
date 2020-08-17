@@ -1,0 +1,120 @@
+---
+title: "Particle Physics"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(mlbench)
+library(caret)
+
+```
+
+## Particle Physics
+
+I was in Zurich working for UBS during the period of 2018-2020. When my family visited me in Zurich during the summer of July/Aug 2019, I took them for 1 day trip to Geneva to visit the CERN laboratory, the birth place of "God particle". The trip was amazing, it takes one through the journey of atomic particle to sub-atomic. There were lots of short video clips, practical demonstrations and exhibitions etc.\newline
+
+
+
+What caught my eyes was a poster with title "Machine Learning for High Energy Physics". The aim of the poster was to explore the new ways to improve the cross-fertilization of the two fields: astrophysics community (dark matter and galaxy zoo challenges) and neurobiology (connectomics and decoding the human brain).\newline
+
+Therefore, I decided to explore what is particle physics and how can the machine learning and deep learning can help solve the particle physics problems. The summary of this short article was the result of my visit to CERN laboratory. 
+
+
+## Problem Statement
+
+After the visit to the CERN laboratory, I started exploring the fundamentals of particle physics, its fundamental equation of particles etc, even though I didn't understand much as it has been a decade since I looked into physics closely but it was very interesting research. As part of this exploration I came across a small simulated dataset at Kaggle website (2014). The goal of the Higgs Boson Machine Learning Challenge is to explore the potential of advanced machine learning methods to improve the discovery significance of the experiment. The good thing about this challenge is no knowledge of particle physics is required. Therefore, I decided to use this dataset to explore how the Machine learning algorithms can be used for Higgs Boson research.
+
+## Data
+
+The data was sourced from the CERN public domain website. For the link please refer to the references.
+
+## Data Pre-processing
+
++ For experimentation, a small portion of data was extracted and written to the local disk.
+
+```{r pressure, echo=FALSE}
+df<- read.csv('C:\\Users\\fakru\\Documents\\Fakruddin\\Physics\\Higgs\\training.csv')
+head(df)
+names(df)
+df_new<-df[,2:33]
+
+
+
+
+#write.csv(df_new[1:10000,],'C:\\Users\\fakru\\Documents\\Fakruddin\\Physics\\Higgs\\small_hiigs_file.csv')
+df_small<-read.csv('C:\\Users\\fakru\\Documents\\Fakruddin\\Physics\\Higgs\\small_hiigs_file.csv')
+dim(df_small)
+```
+
+
+## Data Exploration
+
++ The correlation matrix structure is presented below.
+
+```{r}
+correlationMatrix <- cor(df_small[,1:31])
+print(correlationMatrix)
+highlyCorrelated <- findCorrelation(correlationMatrix, cutoff=0.5)
+print(highlyCorrelated)
+
+```
+
+
+## Variable Importance
+
++ The predictors important plot is shown below.
+
+```{r}
+control <- trainControl(method = "repeatedcv",number=3, repeats=2)
+
+model1<- train(Label~., data=df_small, method="lvq",  trControl=control)
+importance<-varImp(model1,scale=FALSE)
+print(importance)
+# plot importance
+plot(importance)
+```
+
+
+## Lasso Regression
+
++ Modelled Lasso regression for feature selection.
+
+```{r}
+set.seed(7)
+# load the library
+#library(mlbench)
+#library(caret)
+# load the data
+#data(PimaIndiansDiabetes)
+# define the control using a random forest selection function
+control <- rfeControl(functions=rfFuncs, method="cv", number=3)
+# run the RFE algorithm
+results <- rfe(df_small[,1:31], df_small[,32], sizes=c(1:31), rfeControl=control)
+# summarize the results
+print(results)
+# list the chosen features
+predictors(results)
+# plot the results
+plot(results, type=c("g", "o"))
+```
+
+
+```{r}
+library(glmnet)
+y=df_small[,32]
+x=df_small[,1:31]
+lassoRes <- glmnet(as.matrix(x),as.matrix(df_small$Label),alpha=1, lambda=10^((-80:80)/20), family = 'binomial')
+plot(lassoRes, ylim=c(-1,1))
+plot(lassoRes, xvar='dev',ylim=c(-0.03, 0.03))
+legend("topleft", lwd = 1, col = 1:6, legend = colnames(x), cex = 0.7)
+
+```
+
+
+## Modelling
+
+## Conclusions
+
+
